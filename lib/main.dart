@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_4/pages/loginPage.dart';
+import 'package:flutter_application_4/pages/navigatorPage.dart';
 
 void main() {
   runApp(const MyApp());
@@ -13,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: LoginPage(),
+      home: navigatorPage(),//LoginPage(),
     );
   }
 }
