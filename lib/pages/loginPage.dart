@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_application_4/components/my_button.dart';
 import 'package:flutter_application_4/components/my_textfield.dart';
+import 'package:flutter_application_4/components/square_tile.dart';
 
 class LoginPage extends StatelessWidget {
   LoginPage({super.key});
@@ -21,6 +22,7 @@ class LoginPage extends StatelessWidget {
       body: SafeArea(
         child: Center(
           child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
             children: [
               const SizedBox(height: 50),
 
@@ -34,7 +36,7 @@ class LoginPage extends StatelessWidget {
               
             //Welcome
             Text(
-              'Welcome back :))',
+              'Welcome back you\'ve been missed!',
                style: TextStyle(color:Colors.grey[700],
                fontSize: 16,
                ),
@@ -109,18 +111,43 @@ class LoginPage extends StatelessWidget {
                 ],
               ),
             ),
+
+            const SizedBox(height: 50),
               
             //google + apple sign in buttons
            Row(
-            children: [
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: const [
               //google button
-              Image.asset('lin/images/google.png'),
+              SquareTile(imagePath: 'lib/images/google.png'),
 
+              SizedBox(width: 25),
 
+              //apple button
+              SquareTile(imagePath: 'lib/images/apple.png')
             ],
-           )
+           ),
+
+           const SizedBox(height: 50),
 
             //not a remember? register now
+            Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Text(
+                  'Not a remember?',
+                  style: TextStyle(color: Colors.grey[700]),
+                  ),
+                const SizedBox(width: 4),
+                const Text(
+                  'Register now',
+                  style: TextStyle(
+                    color: Colors.blue,
+                    fontWeight: FontWeight.bold,
+                    ),
+                  ),
+              ],
+            )
               
           ],
           ),
