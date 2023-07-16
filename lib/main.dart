@@ -1,7 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_4/pages/loginPage.dart';
 
 void main() {
-  runApp(const MyApp());
+  //runApp(const MyApp());
+  runApp(new MaterialApp(
+  debugShowCheckedModeBanner: false,
+  theme: ThemeData(
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        useMaterial3: true,
+      ),
+  title: "Title",
+  home: new LoginPage(), //Here you can specify the screen the app starts on.
+  routes: <String, WidgetBuilder>{
+    //routes
+  },
+));
 }
 
 class MyApp extends StatelessWidget {
