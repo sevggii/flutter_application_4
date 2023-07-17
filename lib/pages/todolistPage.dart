@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 
 class Task {
-  final String name;
+  final String id;
+  final String workName;
   bool isCompleted;
 
-  Task({required this.name, this.isCompleted = false});
+  Task({required this.id, required this.workName, this.isCompleted = false});
 }
 
 class ToDoListPage extends StatefulWidget {
@@ -30,10 +32,10 @@ class _ToDoListPageState extends State<ToDoListPage> {
                itemBuilder:(context,index){
                  return ListTile(
                    leading :Checkbox(
-                     value :tasks[index].isCompleted ?? false, // Add null check and default value
-                     onChanged :(value)=>setState((){tasks[index].isCompleted = value ?? false;}), // Add null check and default value
+                     value :tasks[index].isCompleted ?? false,
+                     onChanged :(value)=>setState((){tasks[index].isCompleted = value ?? false;}),
                    ),
-                   title :Text(tasks[index].name,
+                   title :Text(tasks[index].workName,
                      style: TextStyle(decoration:
                        tasks[index].isCompleted ? TextDecoration.lineThrough : null),
                    ),
@@ -52,12 +54,14 @@ class _ToDoListPageState extends State<ToDoListPage> {
                     TextField(
                       controller: taskController,
                       onSubmitted: (value) => setState(() { 
-                        tasks.add(Task(name:value));
+                        var uuid = Uuid().v4();
+                        tasks.add(Task(id: uuid, workName:value));
                         }),
                     ),
                   ),
                   IconButton(icon :Icon(Icons.add), onPressed :()=> setState(() { 
-                      tasks.add(Task(name:taskController.text));
+                      var uuid = Uuid().v4();
+                      tasks.add(Task(id: uuid, workName:taskController.text));
                       taskController.clear();
                     }))
                 ])
