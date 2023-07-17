@@ -40,6 +40,12 @@ class _UsersPageState extends State<UsersPage> {
      return Scaffold(
        appBar: AppBar(
          title: const Text('Users List'),
+         actions: [
+           IconButton(
+             icon: Icon(Icons.logout),
+             onPressed: () {},
+           ),
+         ],
        ),
        body: ListView.builder(
          itemCount: users.length,
