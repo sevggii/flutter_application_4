@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_4/pages/loginPage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 
@@ -43,7 +44,13 @@ class _UsersPageState extends State<UsersPage> {
          actions: [
            IconButton(
              icon: Icon(Icons.logout),
-             onPressed: () {},
+             onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => LoginPage()),
+              );
+              
+             },
            ),
          ],
        ),
