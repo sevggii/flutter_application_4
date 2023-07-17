@@ -9,6 +9,13 @@ Project screenshots have been added to this file.
 ![Screenshot_2023 07 16_21 53 18 840](https://github.com/sevgitr/flutter_application_4/assets/49620686/234792ce-6809-408b-9acb-bc9243c4d61b)
 ![Screenshot_2023 07 17_16 42 09 446](https://github.com/sevgitr/flutter_application_4/assets/49620686/603eca88-0afb-4e97-b196-8c33a5784e3c)
 
+## Dependencies I use
+
+- http: ^1.1.0
+
+  ...
+  
+
 
 
 
