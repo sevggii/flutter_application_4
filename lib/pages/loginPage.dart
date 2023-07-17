@@ -5,8 +5,15 @@ import 'package:flutter_application_4/components/square_tile.dart';
 import 'package:flutter_application_4/pages/navigatorPage.dart';
 import 'package:http/http.dart' as http;
 
-class LoginPage extends StatelessWidget {
-  LoginPage({super.key});
+
+class LoginPage extends StatefulWidget {
+  const LoginPage({Key? key});
+
+  @override
+  _LoginPageState createState() => _LoginPageState();
+}
+
+class _LoginPageState extends State<LoginPage> {
 
   //text editing controllers
   final usernameController = TextEditingController();
@@ -14,7 +21,7 @@ class LoginPage extends StatelessWidget {
 
   //sign user in method
   void signUserIn() async {
-  final url = 'https://reqres.in/api/login';
+  const url = 'https://reqres.in/api/login';
   
   // Get username and password that user enters
   final username = usernameController.text;
@@ -22,22 +29,15 @@ class LoginPage extends StatelessWidget {
 
   // login request is sent
   final response = await http.post(Uri.parse(url), body: {
-    'username': username,
-    'password': password,
+    'username': 'eve.holt@reqres.in',//username,
+    'password': 'cityslicka' //password,
   });
 
   if (response.statusCode == 200) {
     print('Login is successful! :)');
-    MaterialPageRoute(builder: (context) => navigatorPage());
-    //eve.holt@reqres.in
-    //cityslicka
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => navigatorPage()));
     
    } else {
-    Text(
-            'Incorrect username / Password',
-            style:
-                TextStyle(color: Colors.red, fontSize: 16),
-          );
      print('Incorrect username / Password :(');
    }
 }
