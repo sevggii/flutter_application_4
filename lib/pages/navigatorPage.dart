@@ -13,7 +13,7 @@ class _navigatorPageState extends State<navigatorPage> {
   int myIndex = 0;
   List<Widget> widgetList=const [
     UsersPage(),//Text('Users', style: TextStyle(fontSize: 40)),
-    todolistPage(),//Text('Todo List', style: TextStyle(fontSize: 40)),
+    ToDoListPage(),//Text('Todo List', style: TextStyle(fontSize: 40)),
   ];
   @override
   Widget build(BuildContext context) {
