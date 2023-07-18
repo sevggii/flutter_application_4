@@ -1,6 +1,7 @@
 # Flutter Login Page Design Example
 ## About the project
-Basic user login operations. Request users by logging in and accessing todo list page. Project screenshots have been added to this file.
+Basic user login operations. Request users by logging in and accessing todo list page. 
+Project screenshots have been added to this file.
 ## Dependencies I use
 - http: ^1.1.0
 - uuid: ^3.0.4
