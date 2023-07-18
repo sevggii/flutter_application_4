@@ -17,6 +17,7 @@ class _LoginPageState extends State<LoginPage> {
   final storage = new FlutterSecureStorage();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
+  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
   void signUserIn() async {
   const url = 'https://reqres.in/api/login';
@@ -41,17 +42,54 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   void saveLoginData(String username, String password) async {
+  try {
     await storage.write(key: "username", value: username);
     await storage.write(key: "password", value: password);
+
     final snackBar = SnackBar(content: Text('Login is successful! :)'));
     print("Data saved");
     Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => navigatorPage()));
-  }
 
-  Future<void> fetchLoginData() async { 
-    String? storedValue = await storage.read(key: "anahtar");
-    print("Saved Login Information: $storedValue");
+    setState(() {});
+  } catch (e) {
+      print("Hata oluştu: $e");
   }
+}
+
+Future<void> fetchLoginData() async { 
+  String? storedUsername = await storage.read(key: "username");
+  String? storedPassword = await storage.read(key: "password");
+
+  if (storedUsername != null && storedPassword != null) {
+     print("Welcome : $storedUsername");
+
+    /* showDialog(
+       context: context,
+       builder:(BuildContext dialogContext){
+         return AlertDialog(
+           title : Text('Saved User Information'),
+           content : Column(
+             crossAxisAlignment : CrossAxisAlignment.start,
+             children:[
+               Text('Username : $storedUsername'),
+               Text('PAssword : $storedPassword'),
+             ],
+           ),
+           actions:<Widget>[
+             TextButton(
+               child :Text('Okay'),
+               onPressed : () { 
+                 Navigator.of(dialogContext).pop();
+               },
+             ),
+           ],
+         );
+       }
+     );*/
+   } else {
+      print("Username / Password incorrect: (");
+   }
+}
 
   @override
   Widget build(BuildContext context) {
