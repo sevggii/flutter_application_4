@@ -2,7 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_4/components/my_button.dart';
 import 'package:flutter_application_4/components/my_textfield.dart';
 import 'package:flutter_application_4/components/square_tile.dart';
+import 'package:flutter_application_4/controllers/login_controller.dart';
 import 'package:flutter_application_4/pages/navigatorPage.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
@@ -90,6 +92,8 @@ Future<void> fetchLoginData() async {
       print("Username / Password incorrect: (");
    }
 }
+
+final _loginController = Get.put(LoginController());
 
   @override
   Widget build(BuildContext context) {

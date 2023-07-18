@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_4/controllers/users_controller.dart';
 import 'package:flutter_application_4/pages/loginPage.dart';
+import 'package:get/get.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
@@ -33,6 +35,8 @@ class _UsersPageState extends State<UsersPage> {
       throw Exception('Failed to fetch users');
     }
   }
+
+  final _usersController = Get.put(UsersController());
 
    @override
    void initState() { 

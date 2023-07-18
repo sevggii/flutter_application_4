@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_4/controllers/main_controller.dart';
 import 'package:flutter_application_4/pages/loginPage.dart';
 import 'package:flutter_application_4/pages/navigatorPage.dart';
 import 'package:get/get.dart';
@@ -19,8 +20,9 @@ class MyApp extends StatelessWidget {
   final String? username;
   final String? password;
 
-  const MyApp({Key? key, this.username, this.password}) : super(key: key);
+   MyApp({Key? key, this.username, this.password}) : super(key: key);
 
+   final _mainController = Get.put(MainController());
   @override
   Widget build(BuildContext context) {
     if (username != null && password != null) {
