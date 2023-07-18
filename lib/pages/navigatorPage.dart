@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_application_4/controllers/navigator_controller.dart';
 import 'package:flutter_application_4/pages/todolistPage.dart';
 import 'package:flutter_application_4/pages/usersPage.dart';
+import 'package:get/get.dart';
 
 class navigatorPage extends StatefulWidget {
   const navigatorPage({super.key});
@@ -15,6 +17,8 @@ class _navigatorPageState extends State<navigatorPage> {
     UsersPage(),//Text('Users', style: TextStyle(fontSize: 40)),
     ToDoListPage(),//Text('Todo List', style: TextStyle(fontSize: 40)),
   ];
+
+  final _navigatorController = Get.put(NavigatorController());
   @override
   Widget build(BuildContext context) {
     return Scaffold(
