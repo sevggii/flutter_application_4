@@ -4,7 +4,7 @@ import 'package:flutter_application_4/components/my_textfield.dart';
 import 'package:flutter_application_4/components/square_tile.dart';
 import 'package:flutter_application_4/pages/navigatorPage.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key});
@@ -14,12 +14,10 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-
-  //text editing controllers
+  final storage = new FlutterSecureStorage();
   final usernameController = TextEditingController();
   final passwordController = TextEditingController();
 
-  //sign user in method
   void signUserIn() async {
   const url = 'https://reqres.in/api/login';
   
@@ -27,20 +25,33 @@ class _LoginPageState extends State<LoginPage> {
   final username = usernameController.text;
   final password = passwordController.text;
 
-  // login request is sent
+  // login request
   final response = await http.post(Uri.parse(url), body: {
     'username': 'eve.holt@reqres.in',//username,
     'password': 'cityslicka' //password,
   });
 
   if (response.statusCode == 200) {
-    print('Login is successful! :)');
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => navigatorPage()));
+    saveLoginData('eve.holt@reqres.in','cityslicka');//username,password
+    fetchLoginData();
     
    } else {
      print('Incorrect username / Password :(');
    }
-}
+  }
+
+  void saveLoginData(String username, String password) async {
+    await storage.write(key: "username", value: username);
+    await storage.write(key: "password", value: password);
+    final snackBar = SnackBar(content: Text('Login is successful! :)'));
+    print("Data saved");
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => navigatorPage()));
+  }
+
+  Future<void> fetchLoginData() async { 
+    String? storedValue = await storage.read(key: "anahtar");
+    print("Saved Login Information: $storedValue");
+  }
 
   @override
   Widget build(BuildContext context) {
