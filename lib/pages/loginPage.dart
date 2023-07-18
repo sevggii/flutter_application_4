@@ -16,82 +16,8 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final storage = new FlutterSecureStorage();
-  final usernameController = TextEditingController();
-  final passwordController = TextEditingController();
   final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
-  void signUserIn() async {
-  const url = 'https://reqres.in/api/login';
-  
-  // Get username and password that user enters
-  final username = usernameController.text;
-  final password = passwordController.text;
-
-  // login request
-  final response = await http.post(Uri.parse(url), body: {
-    'username': 'eve.holt@reqres.in',//username,
-    'password': 'cityslicka' //password,
-  });
-
-  if (response.statusCode == 200) {
-    saveLoginData('eve.holt@reqres.in','cityslicka');//username,password
-    fetchLoginData();
-    
-   } else {
-     print('Incorrect username / Password :(');
-   }
-  }
-
-  void saveLoginData(String username, String password) async {
-  try {
-    await storage.write(key: "username", value: username);
-    await storage.write(key: "password", value: password);
-
-    final snackBar = SnackBar(content: Text('Login is successful! :)'));
-    print("Data saved");
-    Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => navigatorPage()));
-
-    setState(() {});
-  } catch (e) {
-      print("Hata oluştu: $e");
-  }
-}
-
-Future<void> fetchLoginData() async { 
-  String? storedUsername = await storage.read(key: "username");
-  String? storedPassword = await storage.read(key: "password");
-
-  if (storedUsername != null && storedPassword != null) {
-     print("Welcome : $storedUsername");
-
-    /* showDialog(
-       context: context,
-       builder:(BuildContext dialogContext){
-         return AlertDialog(
-           title : Text('Saved User Information'),
-           content : Column(
-             crossAxisAlignment : CrossAxisAlignment.start,
-             children:[
-               Text('Username : $storedUsername'),
-               Text('PAssword : $storedPassword'),
-             ],
-           ),
-           actions:<Widget>[
-             TextButton(
-               child :Text('Okay'),
-               onPressed : () { 
-                 Navigator.of(dialogContext).pop();
-               },
-             ),
-           ],
-         );
-       }
-     );*/
-   } else {
-      print("Username / Password incorrect: (");
-   }
-}
 
 final _loginController = Get.put(LoginController());
 
@@ -126,7 +52,7 @@ final _loginController = Get.put(LoginController());
               
             //username textfield
             MyTextField(
-              controller: usernameController,
+              controller: _loginController.usernameController,
               hintText: 'Username',
               obscureText: false,
             ),
@@ -135,7 +61,7 @@ final _loginController = Get.put(LoginController());
               
             //password textfield
             MyTextField(
-              controller: passwordController,
+              controller: _loginController.passwordController,
               hintText: 'Password',
               obscureText: true,
                
@@ -158,9 +84,13 @@ final _loginController = Get.put(LoginController());
 
              const SizedBox(height: 25),
               
+              //eve.holt@reqres.in
+              //cityslicka
             //sign in button 
             MyButton(
-              onTap: signUserIn,
+              onTap:(){
+                _loginController.signUserIn();
+              }
             ),
 
             const SizedBox(height: 50),
