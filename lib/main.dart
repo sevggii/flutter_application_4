@@ -7,7 +7,7 @@ import 'package:http/http.dart' as http;
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+  //WidgetsFlutterBinding.ensureInitialized();
   
   final storage = FlutterSecureStorage();
   final username = await storage.read(key: "username");
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
 
    MyApp({Key? key, this.username, this.password}) : super(key: key);
 
-   final _mainController = Get.put(MainController());
+  final _mainController = Get.put(MainController());
   @override
   Widget build(BuildContext context) {
     if (username != null && password != null) {
