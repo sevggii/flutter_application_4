@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_application_4/pages/loginPage.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 class UsersPage extends StatefulWidget {
   const UsersPage({Key? key});
@@ -12,6 +13,8 @@ class UsersPage extends StatefulWidget {
 
 class _UsersPageState extends State<UsersPage> {
   List<Map<String, dynamic>> users = [];
+  
+  final storage = FlutterSecureStorage();
 
   Future<void> fetchUsers() async {
     final response =
@@ -20,7 +23,7 @@ class _UsersPageState extends State<UsersPage> {
     if (response.statusCode == 200) {
       setState(() {
         final jsonData = json.decode(response.body);
-        if (jsonData.containsKey('data')) { // data is in the correct format?
+        if (jsonData.containsKey('data')) { // data is in correct format?
           users = List<Map<String, dynamic>>.from(jsonData['data']);
         } else {
           throw Exception('Invalid data format');
@@ -44,13 +47,13 @@ class _UsersPageState extends State<UsersPage> {
          actions: [
            IconButton(
              icon: Icon(Icons.logout),
-             onPressed: () {
-              Navigator.push(
+              onPressed: () async {
+              await storage.deleteAll(); 
+              Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(builder: (context) => LoginPage()),
               );
-              
-             },
+              }
            ),
          ],
        ),
