@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get_state_manager/get_state_manager.dart';
 import 'package:http/http.dart' as http;
@@ -15,8 +16,8 @@ class LoginController extends GetxController {
     const url = 'https://reqres.in/api/login';
     
     // Get username and password that user enters
-    final username = 'eve.holt@reqres.in'; //usernameController.text;
-    final password = 'cityslicka'; //passwordController.text;
+    final username = usernameController.text; //'eve.holt@reqres.in';
+    final password = passwordController.text; //'cityslicka';
     
     final response =
         await http.post(Uri.parse(url), body: {'username': username, 'password': password});
@@ -25,7 +26,24 @@ class LoginController extends GetxController {
       saveLoginData(username.toString(), password.toString());
       fetchLoginData();
     } else {
-      print('Incorrect username / Password :(');
+      Get.dialog(
+      AlertDialog(
+        title: Text("Wrong password"),
+        content: Text("Invalid username or password, please try again :("),
+        actions: [
+          TextButton(
+            child: Text("Okay"),
+            onPressed: () => Get.back(),
+          ),
+        ],
+      ),
+      barrierDismissible: false,
+    );
+      /*Get.snackbar(
+      "Incorrect password",
+      "Username or password is wrong, please try again :( ",
+      snackPosition: SnackPosition.TOP,
+      duration: Duration(seconds: 3));*/
     }
   }
 
@@ -48,30 +66,6 @@ class LoginController extends GetxController {
 
    if(storedUsername!=null&&storedPassword!=null){
      print("Welcome : $storedUsername");
-
-         /* showDialog(
-           context: context,
-           builder:(BuildContext dialogContext){
-             return AlertDialog(
-               title : Text('Saved User Information'),
-               content : Column(
-                 crossAxisAlignment : CrossAxisAlignment.start,
-                 children:[
-                   Text('Username : $storedUsername'),
-                   Text('PAssword : $storedPassword'),
-                 ],
-               ),
-               actions:<Widget>[
-                 TextButton(
-                   child :Text('Okay'),
-                   onPressed : () { 
-                     Navigator.of(dialogContext).pop();
-                   },
-                 ),
-               ],
-             );
-           }
-         );*/
    }else{
      print("Username / Password incorrect: (");
    }
