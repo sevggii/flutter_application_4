@@ -12,7 +12,6 @@ class navigatorPage extends StatefulWidget {
 }
 
 class _navigatorPageState extends State<navigatorPage> {
-  int myIndex = 0;
   List<Widget> widgetList=const [
     UsersPage(),//Text('Users', style: TextStyle(fontSize: 40)),
     ToDoListPage(),//Text('Todo List', style: TextStyle(fontSize: 40)),
@@ -24,7 +23,7 @@ class _navigatorPageState extends State<navigatorPage> {
     return Scaffold(
       body:  IndexedStack(
         children: widgetList,
-        index: myIndex,
+        index: _navigatorController.myIndex.value,
         ),
      // appBar: AppBar(
        // title: const Text('Bottom Navigation Bar'),
@@ -36,10 +35,10 @@ class _navigatorPageState extends State<navigatorPage> {
         type: BottomNavigationBarType.fixed,//shifting,
         onTap: (index){
           setState(() {
-            myIndex=index;
+            _navigatorController.myIndex.value=index;
           });
         },
-        currentIndex: myIndex,
+        currentIndex: _navigatorController.myIndex.value,
         items:const [
         BottomNavigationBarItem(
           icon: Icon(Icons.person),
