@@ -19,6 +19,7 @@ class _UsersPageState extends State<UsersPage> {
    @override
    void initState() { 
      super.initState();
+     _usersController.fetchUsers();
    }
 
    Widget build(BuildContext context) { 
