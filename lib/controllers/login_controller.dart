@@ -14,6 +14,8 @@ class LoginController extends GetxController {
    signUserIn() async {
     const url = 'https://reqres.in/api/login';
     // Get username and password that user enters
+    //eve.holt@reqres.in
+    //cityslicka
     final username = usernameController.text;
     final password = passwordController.text;
     
@@ -36,7 +38,7 @@ class LoginController extends GetxController {
 
        print("Data saved");
       
-       Get.to(navigatorPage());
+       Get.off(navigatorPage());
      } catch (e) { 
        print("Hata oluştu $e");
      }

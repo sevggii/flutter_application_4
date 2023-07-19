@@ -16,7 +16,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
+  //final GlobalKey<NavigatorState> navigatorKey = GlobalKey<NavigatorState>();
 
 
 final _loginController = Get.put(LoginController());
@@ -84,8 +84,7 @@ final _loginController = Get.put(LoginController());
 
              const SizedBox(height: 25),
               
-              //eve.holt@reqres.in
-              //cityslicka
+      
             //sign in button 
             MyButton(
               onTap:(){
