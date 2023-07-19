@@ -16,10 +16,10 @@ class LoginController extends GetxController {
     // Get username and password that user enters
     //eve.holt@reqres.in
     //cityslicka
+    // Get username and password that user enters
     final username = usernameController.text;
     final password = passwordController.text;
     
-    // login request
     final response =
         await http.post(Uri.parse(url), body: {'username': username, 'password': password});
 

@@ -8,24 +8,16 @@ import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  
-  final storage = FlutterSecureStorage();
-  final username = await storage.read(key: "username");
-  final password = await storage.read(key: "password");
 
-  runApp(MyApp(username: username, password: password));
+  runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
-  final String? username;
-  final String? password;
-
-   MyApp({Key? key, this.username, this.password}) : super(key: key);
 
   final _mainController = Get.put(MainController());
   @override
   Widget build(BuildContext context) {
-    if (username != null && password != null) {
+    if (_mainController.username != null && _mainController.password != null) {
       return GetMaterialApp(
         home: navigatorPage(),
       );
