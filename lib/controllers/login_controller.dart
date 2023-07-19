@@ -13,12 +13,10 @@ class LoginController extends GetxController {
 
    signUserIn() async {
     const url = 'https://reqres.in/api/login';
+    
     // Get username and password that user enters
-    //eve.holt@reqres.in
-    //cityslicka
-    // Get username and password that user enters
-    final username = usernameController.text;
-    final password = passwordController.text;
+    final username = 'eve.holt@reqres.in'; //usernameController.text;
+    final password = 'cityslicka'; //passwordController.text;
     
     final response =
         await http.post(Uri.parse(url), body: {'username': username, 'password': password});
